@@ -1,0 +1,12 @@
+click==6.7
+Faker==0.8.13
+Flask==1.0.2
+ipaddress==1.0.22
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+phonenumbers==8.9.4
+python-dateutil==2.7.2
+six==1.11.0
+text-unidecode==1.2
+Werkzeug==0.14.1
