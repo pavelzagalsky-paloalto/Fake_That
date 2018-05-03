@@ -14,33 +14,46 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-uk_base_phone_num = '+4477001'
-us_base_phone_num = '+171840'
-nl_base_phone_num = '+316199'
-random_num = randint(00000, 99999)
+uk_prefix = '+44'
+uk_header_phone_num = '77001'
+uk_base_phone_num = uk_prefix + uk_header_phone_num
+us_prefix = '+1'
+us_header_phone_num = '71840'
+us_base_phone_num = us_prefix + us_header_phone_num
+nl_prefix = '+31'
+nl_header_phone_num = '6199'
+nl_base_phone_num = nl_prefix + nl_header_phone_num
+fr_prefix = '+33'
+fr_header_phone_num = '6231'
+fr_base_phone_num = fr_prefix + fr_header_phone_num
 
 
-def randomize(base_phone_num):
+def randomize(header_phone_num, base_phone_num):
     random_num = randint(00000, 99999)
     fake_number = '{}{}'.format(base_phone_num, random_num)
+    fake_number_no_prefix = '{}{}'.format(header_phone_num, random_num)
     is_valid = check_validity(fake_number)
     while not is_valid:
         random_num = randint(00000, 99999)
         fake_number = '{}{}'.format(base_phone_num, random_num)
+        fake_number_no_prefix = '{}{}'.format(header_phone_num, random_num)
         is_valid = check_validity(fake_number)
-    return fake_number
+    return fake_number, fake_number_no_prefix
 
 
 def get_phone(locale):
     if 'en_GB' in locale:
-        fake_number = randomize(uk_base_phone_num)
-        return fake_number
+        fake_number, fake_number_no_prefix = randomize(uk_header_phone_num, uk_base_phone_num)
+        return fake_number, fake_number_no_prefix
     elif 'en_US' in locale:
-        fake_number = randomize(us_base_phone_num)
-        return fake_number
+        fake_number, fake_number_no_prefix = randomize(us_header_phone_num, us_base_phone_num)
+        return fake_number, fake_number_no_prefix
     elif 'nl_NL' in locale:
-        fake_number = randomize(nl_base_phone_num)
-        return fake_number
+        fake_number, fake_number_no_prefix = randomize(nl_header_phone_num, nl_base_phone_num)
+        return fake_number, fake_number_no_prefix
+    elif 'fr_FR' in locale:
+        fake_number, fake_number_no_prefix = randomize(fr_header_phone_num, fr_base_phone_num)
+        return fake_number, fake_number_no_prefix
 
 
 def check_validity(phone_number):
@@ -61,7 +74,7 @@ def test():
 def get_profile(locale):
     logger.info(locale)
     fake = Faker(locale)
-    phone_number = get_phone(locale)
+    phone_number, phone_number_no_prefix = get_phone(locale)
     credit_card_number = fake.credit_card_number()
     credit_card_expire = fake.credit_card_expire()
     credit_card_provider = fake.credit_card_provider()
@@ -71,6 +84,7 @@ def get_profile(locale):
     address = fake.address()
     profile_list = {
         "phone_number": phone_number,
+        "phone_number_no_prefix": phone_number_no_prefix,
         "credit_card": {
             "credit_card_number": credit_card_number,
             "credit_card_expire": credit_card_expire,
