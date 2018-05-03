@@ -16,6 +16,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 uk_base_phone_num = '+4477001'
 us_base_phone_num = '+171840'
+nl_base_phone_num = '+31619'
 
 
 def get_phone(locale):
@@ -23,17 +24,28 @@ def get_phone(locale):
         random_num = randint(00000, 99999)
         fake_number = '{}{}'.format(uk_base_phone_num, random_num)
         is_valid = check_validity(fake_number)
-        if not is_valid:
+        while not is_valid:
             random_num = randint(00000, 99999)
             fake_number = '{}{}'.format(uk_base_phone_num, random_num)
+            is_valid = check_validity(fake_number)
         return fake_number
     elif 'en_US' in locale:
         random_num = randint(00000, 99999)
         fake_number = '{}{}'.format(us_base_phone_num, random_num)
         is_valid = check_validity(fake_number)
-        if not is_valid:
+        while not is_valid:
             random_num = randint(00000, 99999)
             fake_number = '{}{}'.format(uk_base_phone_num, random_num)
+            is_valid = check_validity(fake_number)
+        return fake_number
+    elif 'nl_NL' in locale:
+        random_num = randint(00000, 999999)
+        fake_number = '{}{}'.format(nl_base_phone_num, random_num)
+        is_valid = check_validity(fake_number)
+        while not is_valid:
+            random_num = randint(00000, 999999)
+            fake_number = '{}{}'.format(nl_base_phone_num, random_num)
+            is_valid = check_validity(fake_number)
         return fake_number
 
 
