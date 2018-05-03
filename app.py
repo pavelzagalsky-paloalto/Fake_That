@@ -82,6 +82,7 @@ def get_profile(locale):
     first_name = fake.first_name()
     last_name = fake.last_name()
     address = fake.address()
+    e_mail = fake.email()
     profile_list = {
         "phone_number": phone_number,
         "phone_number_no_prefix": phone_number_no_prefix,
@@ -93,7 +94,8 @@ def get_profile(locale):
         "currency": currency,
         "first_name": first_name,
         "last_name": last_name,
-        "address": address
+        "address": address,
+        "e_mail": e_mail
     }
     profile_json = jsonify(profile_list)
     return profile_json
