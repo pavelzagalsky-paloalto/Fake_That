@@ -26,6 +26,9 @@ nl_base_phone_num = nl_prefix + nl_header_phone_num
 fr_prefix = '+33'
 fr_header_phone_num = '6231'
 fr_base_phone_num = fr_prefix + fr_header_phone_num
+au_prefix = '+61'
+au_header_phone_num = '4915'
+au_base_phone_num = au_prefix + au_header_phone_num
 
 
 def randomize(header_phone_num, base_phone_num):
@@ -53,6 +56,9 @@ def get_phone(locale):
         return fake_number, fake_number_no_prefix
     elif 'fr_FR' in locale:
         fake_number, fake_number_no_prefix = randomize(fr_header_phone_num, fr_base_phone_num)
+        return fake_number, fake_number_no_prefix
+    elif 'en_AU' in locale:
+        fake_number, fake_number_no_prefix = randomize(au_header_phone_num, au_base_phone_num)
         return fake_number, fake_number_no_prefix
 
 
