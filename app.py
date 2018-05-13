@@ -31,7 +31,7 @@ au_header_phone_num = '4915'
 au_base_phone_num = au_prefix + au_header_phone_num
 nz_prefix = '+64'
 nz_header_phone_num = '491'
-nz_base_phone_num = au_prefix + au_header_phone_num
+nz_base_phone_num = nz_prefix + nz_header_phone_num
 
 
 def randomize(header_phone_num, base_phone_num):
