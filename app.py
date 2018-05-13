@@ -29,6 +29,9 @@ fr_base_phone_num = fr_prefix + fr_header_phone_num
 au_prefix = '+61'
 au_header_phone_num = '4915'
 au_base_phone_num = au_prefix + au_header_phone_num
+nz_prefix = '+64'
+nz_header_phone_num = '491'
+nz_base_phone_num = au_prefix + au_header_phone_num
 
 
 def randomize(header_phone_num, base_phone_num):
@@ -60,6 +63,9 @@ def get_phone(locale):
     elif 'en_AU' in locale:
         fake_number, fake_number_no_prefix = randomize(au_header_phone_num, au_base_phone_num)
         return fake_number, fake_number_no_prefix
+    elif 'en_NZ' in locale:
+        fake_number, fake_number_no_prefix = randomize(nz_header_phone_num, nz_base_phone_num)
+        return fake_number, fake_number_no_prefix
 
 
 def check_validity(phone_number):
@@ -79,8 +85,13 @@ def test():
 @app.route('/get_profile/<locale>', methods=['GET'])
 def get_profile(locale):
     logger.info(locale)
+    if locale == 'en_NZ':
+        locale = 'en_AU'
+        phone_locale = 'en_NZ'
+    else:
+        phone_locale = locale
     fake = Faker(locale)
-    phone_number, phone_number_no_prefix = get_phone(locale)
+    phone_number, phone_number_no_prefix = get_phone(phone_locale)
     credit_card_number = fake.credit_card_number()
     credit_card_expire = fake.credit_card_expire()
     credit_card_provider = fake.credit_card_provider()
