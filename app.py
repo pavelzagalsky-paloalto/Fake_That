@@ -14,9 +14,9 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-uk_prefix = '+44'
-uk_header_phone_num = '77001'
-uk_base_phone_num = uk_prefix + uk_header_phone_num
+gb_prefix = '+44'
+gb_header_phone_num = '77001'
+gb_base_phone_num = gb_prefix + gb_header_phone_num
 us_prefix = '+1'
 us_header_phone_num = '71840'
 us_base_phone_num = us_prefix + us_header_phone_num
@@ -49,7 +49,7 @@ def randomize(header_phone_num, base_phone_num):
 
 def get_phone(locale):
     if 'en_GB' in locale:
-        fake_number, fake_number_no_prefix = randomize(uk_header_phone_num, uk_base_phone_num)
+        fake_number, fake_number_no_prefix = randomize(gb_header_phone_num, gb_base_phone_num)
         return fake_number, fake_number_no_prefix
     elif 'en_US' in locale:
         fake_number, fake_number_no_prefix = randomize(us_header_phone_num, us_base_phone_num)
