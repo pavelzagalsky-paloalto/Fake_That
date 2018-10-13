@@ -1,10 +1,10 @@
-from flask import Flask, jsonify
-from faker import Faker
-import phonenumbers
+from flask import Flask, Response
+import json
 import logging
 import os
-from random import randint
-app = Flask(__name__)
+
+from phone_num_builder import PhoneNum
+from fake_profile_builder import FakeProfile
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -14,108 +14,39 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-gb_prefix = '+44'
-gb_header_phone_num = '77001'
-gb_base_phone_num = gb_prefix + gb_header_phone_num
-us_prefix = '+1'
-us_header_phone_num = '71840'
-us_base_phone_num = us_prefix + us_header_phone_num
-nl_prefix = '+31'
-nl_header_phone_num = '6199'
-nl_base_phone_num = nl_prefix + nl_header_phone_num
-fr_prefix = '+33'
-fr_header_phone_num = '6231'
-fr_base_phone_num = fr_prefix + fr_header_phone_num
-au_prefix = '+61'
-au_header_phone_num = '4915'
-au_base_phone_num = au_prefix + au_header_phone_num
-nz_prefix = '+64'
-nz_header_phone_num = '449'
-nz_base_phone_num = nz_prefix + nz_header_phone_num
 
 
-def randomize(header_phone_num, base_phone_num):
-    random_num = randint(00000, 99999)
-    fake_number = '{}{}'.format(base_phone_num, random_num)
-    fake_number_no_prefix = '{}{}'.format(header_phone_num, random_num)
-    is_valid = check_validity(fake_number)
-    while not is_valid:
-        random_num = randint(00000, 99999)
-        fake_number = '{}{}'.format(base_phone_num, random_num)
-        fake_number_no_prefix = '{}{}'.format(header_phone_num, random_num)
-        is_valid = check_validity(fake_number)
-    return fake_number, fake_number_no_prefix
-
-
-def get_phone(locale):
-    if 'en_GB' in locale:
-        fake_number, fake_number_no_prefix = randomize(gb_header_phone_num, gb_base_phone_num)
-        return fake_number, fake_number_no_prefix
-    elif 'en_US' in locale:
-        fake_number, fake_number_no_prefix = randomize(us_header_phone_num, us_base_phone_num)
-        return fake_number, fake_number_no_prefix
-    elif 'nl_NL' in locale:
-        fake_number, fake_number_no_prefix = randomize(nl_header_phone_num, nl_base_phone_num)
-        return fake_number, fake_number_no_prefix
-    elif 'fr_FR' in locale:
-        fake_number, fake_number_no_prefix = randomize(fr_header_phone_num, fr_base_phone_num)
-        return fake_number, fake_number_no_prefix
-    elif 'en_AU' in locale:
-        fake_number, fake_number_no_prefix = randomize(au_header_phone_num, au_base_phone_num)
-        return fake_number, fake_number_no_prefix
-    elif 'en_NZ' in locale:
-        fake_number, fake_number_no_prefix = randomize(nz_header_phone_num, nz_base_phone_num)
-        return fake_number, fake_number_no_prefix
-
-
-def check_validity(phone_number):
-    parsed_phone_number = phonenumbers.parse(phone_number, None)
-    is_valid = phonenumbers.is_valid_number(parsed_phone_number)
-    return is_valid
+app = Flask(__name__)
 
 
 @app.route("/test", methods=['GET', 'POST'])
 def test():
-    message = 'This is the test route'
+    message = 'This is a test route'
     logger.info(message)
-    print(message)
-    return message
+    message_json = json.dumps(message)
+    return Response(message_json, status=200, mimetype='application/json')
 
 
 @app.route('/get_profile/<locale>', methods=['GET'])
 def get_profile(locale):
-    logger.info(locale)
-    if locale == 'en_NZ':
-        locale = 'en_AU'
-        phone_locale = 'en_NZ'
-    else:
-        phone_locale = locale
-    fake = Faker(locale)
-    phone_number, phone_number_no_prefix = get_phone(phone_locale)
-    credit_card_number = fake.credit_card_number()
-    credit_card_expire = fake.credit_card_expire()
-    credit_card_provider = fake.credit_card_provider()
-    currency = fake.currency()
-    first_name = fake.first_name()
-    last_name = fake.last_name()
-    address = fake.address()
-    e_mail = fake.email()
-    profile_list = {
-        "phone_number": phone_number,
-        "phone_number_no_prefix": phone_number_no_prefix,
-        "credit_card": {
-            "credit_card_number": credit_card_number,
-            "credit_card_expire": credit_card_expire,
-            "credit_card_provider": credit_card_provider
-        },
-        "currency": currency,
-        "first_name": first_name,
-        "last_name": last_name,
-        "address": address,
-        "e_mail": e_mail
-    }
-    profile_json = jsonify(profile_list)
-    return profile_json
+    locale_error_message = '{} {}'.format(locale, 'is an unsupported locale')
+    fail_response = json.dumps({"status": locale_error_message})
+
+    logger.info('{} {} {}'.format('A request for', locale, 'locale was received'))
+    # Generating random phone.
+    rand_phone_obj = PhoneNum(locale)
+    try:
+        fake_number, fake_number_no_prefix = rand_phone_obj.randomize()
+        logger.info('{} {}'.format(fake_number, 'number was generated'))
+    except:
+        return Response(fail_response, status=400, mimetype='application/json')
+
+    # Generating fake profile.
+    fake_profile_obj = FakeProfile(locale, fake_number, fake_number_no_prefix)
+    profile_dict = fake_profile_obj.build_fake_profile()
+    profile_json = json.dumps(profile_dict)
+    logger.info('{} {}'.format('The served jsoned profile was', profile_json))
+    return Response(profile_json, status=200, mimetype='application/json')
 
 
 if __name__ == '__main__':
