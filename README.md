@@ -6,7 +6,7 @@ Fake that is a simple web service that allows generating a fake user profile for
 
 To run, simply build the docker image with a provided Dockerfile and access the service with the following endpoint:
 
-http://<your web address>:5000/get_profile/<locale> 
+http://"your web address":5000/get_profile/"locale"
 
 for example:
 
