@@ -16,14 +16,14 @@ class FakeProfile():
 
     def build_fake_profile(self):
         locale_temp = self.locale
-        locale_str = locale_temp.encode("utf-8")
-        locale.setlocale(locale.LC_ALL, locale_str)
-        sym = locale.localeconv()['int_curr_symbol']
-        currency_name = numbers.get_currency_name(sym, locale=locale_str)
+        # locale_str = locale_temp.encode("utf-8")
+        # locale.setlocale(locale.LC_ALL, locale_str)
+        # sym = locale.localeconv()['int_curr_symbol']
+        # currency_name = numbers.get_currency_name(sym, locale=locale_str)
 
         # reverting the original locale to en_US
         original_locale = 'en_US'
-        locale.setlocale(locale.LC_ALL, original_locale)
+        # locale.setlocale(locale.LC_ALL, original_locale)
         try:
             fake = Faker(self.locale)
             address = fake.address()
@@ -44,7 +44,7 @@ class FakeProfile():
                 "credit_card_expire": credit_card_expire,
                 "credit_card_provider": credit_card_provider
             },
-            "currency": currency_name,
+            # "currency": currency_name,
             "first_name": first_name,
             "last_name": last_name,
             "address": address,
