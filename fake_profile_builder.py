@@ -1,7 +1,5 @@
 from faker import Faker
-import locale
-from babel import numbers
-
+import os,binascii
 
 class FakeProfile():
     """
@@ -35,7 +33,8 @@ class FakeProfile():
         credit_card_provider = fake.credit_card_provider()
         first_name = fake.first_name()
         last_name = fake.last_name()
-        e_mail = fake.email()
+        random_base64 = binascii.b2a_hex(os.urandom(5))
+        e_mail = '{}_{}'.format(random_base64, fake.email())
         profile_list = {
             "phone_number": self.fake_number,
             "phone_number_no_prefix": self.fake_number_no_prefix,
