@@ -31,7 +31,7 @@ http://my_fake_profile.com:5000/get_profile/en_US
 
 Currently the following locales are supported:
 
-de_de, en_gb, en_us, en_ca, en_nz, nl_nl, en_au, fr_fr, he_il, ja_jp.
+de_de, en_gb, en_us, en_ca, en_nz, es_es, es_mx, nl_nl, en_au, fr_fr, he_il, ja_jp, pt_br
 
 **Any contribution is welcome!!**
 
