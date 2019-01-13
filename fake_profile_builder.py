@@ -1,6 +1,7 @@
 from faker import Faker
 import os,binascii
 
+
 class FakeProfile():
     """
     This Class generates a fake profile to be sent per a request with the following parameters:

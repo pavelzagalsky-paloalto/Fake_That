@@ -10,6 +10,10 @@
 "en_nz_header": 449
 "en_sg_prefix": +65
 "en_sg_header": 965
+"es_es_prefix": +34
+"es_es_header": 9123
+"es_mx_prefix": +44
+"es_mx_header": 55123
 "nl_nl_prefix": +31
 "nl_nl_header": 6199
 "en_au_prefix": +61
@@ -20,4 +24,5 @@
 "he_il_header": 5841
 "ja_jp_prefix": +81
 "ja_jp_header": 4263
-
+"pt_br_prefix": +55
+"pt_br_header": 119989
