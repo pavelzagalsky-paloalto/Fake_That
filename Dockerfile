@@ -13,6 +13,7 @@ RUN pip install Flask
 RUN pip install Faker
 RUN pip install phonenumbers
 RUN pip install PyYAML
+RUN pip install requests
 
 
 CMD [ "python", "./app.py" ]
