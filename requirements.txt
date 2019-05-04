@@ -4,7 +4,7 @@ Faker==0.8.13
 Flask==1.0.2
 ipaddress==1.0.22
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.10.1
 MarkupSafe==1.0
 phonenumbers==8.10.1
 pycountry==18.5.26
