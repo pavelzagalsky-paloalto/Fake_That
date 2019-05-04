@@ -19,6 +19,11 @@ logger.addHandler(handler)
 app = Flask(__name__)
 
 
+@app.route("/healthz", methods=['GET'])
+def healthz():
+    return 'OK'
+
+
 @app.route("/test", methods=['GET', 'POST'])
 def test():
     message = 'This is a test route'
@@ -29,9 +34,6 @@ def test():
 
 @app.route('/get_profile/<locale>', methods=['GET'])
 def get_profile(locale):
-    locale_error_message = '{} {}'.format(locale, 'is an unsupported locale')
-    fail_response = json.dumps({"status": locale_error_message})
-
     logger.info('{} {} {}'.format('A request for', locale, 'locale was received'))
     # Generating random phone.
     rand_phone_obj = PhoneNum(locale)
@@ -39,6 +41,8 @@ def get_profile(locale):
         fake_number, fake_number_no_prefix = rand_phone_obj.randomize()
         logger.info('{} {}'.format(fake_number, 'number was generated'))
     except:
+        locale_error_message = '{} {}'.format(locale, 'is an unsupported locale')
+        fail_response = json.dumps({"status": locale_error_message})
         return Response(fail_response, status=400, mimetype='application/json')
 
     # Generating fake profile.
