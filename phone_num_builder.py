@@ -26,9 +26,14 @@ class PhoneNum():
         fake_number, fake_number_no_prefix = randomize_local(prefix=self.prefix, header=self.header)
         if 'False' in fake_number or 'False' in str(fake_number_no_prefix):
             return False
-        while not carrier._is_mobile(number_type(phonenumbers.parse(fake_number))):
+        counter = 0
+        while not carrier._is_mobile(number_type(phonenumbers.parse(fake_number))) and counter < 5:
             fake_number, fake_number_no_prefix = randomize_local(prefix=self.prefix, header=self.header)
+            counter += 1
+            if counter == 5:
+                return 0
         return fake_number, fake_number_no_prefix
+
 
 
 def randomize_local(prefix, header):

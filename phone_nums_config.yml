@@ -1,50 +1,54 @@
-"de_de_prefix": +49
+"de_de_prefix": +49 #Germany
 "de_de_header": 89
-"en_gb_prefix": +44
+"en_gb_prefix": +44 #UK
 "en_gb_header": 77001
-"en_us_prefix": +1
+"en_us_prefix": +1 #USA
 "en_us_header": 71840
-"en_ca_prefix": +1
+"en_ca_prefix": +1 #Canada
 "en_ca_header": 41655
-"en_nz_prefix": +64
+"en_nz_prefix": +64 #New Zealand
 "en_nz_header": 449
-"en_sg_prefix": +65
+"en_sg_prefix": +65 #Singapore
 "en_sg_header": 965
-"es_es_prefix": +34
+"es_es_prefix": +34 #Spain
 "es_es_header": 9123
-"es_mx_prefix": +44
+"es_mx_prefix": +44 #Mexico
 "es_mx_header": 55123
-"nl_nl_prefix": +31
+"nl_nl_prefix": +31 #Netherlands
 "nl_nl_header": 6199
-"en_au_prefix": +61
+"en_au_prefix": +61 #Australia
 "en_au_header": 4915
-"fr_fr_prefix": +33
+"fr_fr_prefix": +33 #France
 "fr_fr_header": 6231
-"he_il_prefix": +972
+"he_il_prefix": +972 #Israel
 "he_il_header": 5841
-"ja_jp_prefix": +81
+"ja_jp_prefix": +81 #japan
 "ja_jp_header": 4263
-"pt_br_prefix": +55
+"pt_br_prefix": +55 #Brazil
 "pt_br_header": 119989
-"id_id_prefix": +628
-"id_id_header": 888
-"in_id_prefix": +628
+"in_id_prefix": +628 #Indonesia
 "in_id_header": 888
-"ar_qa_prefix": +974
+"ar_qa_prefix": +974 #Qatar
 "ar_qa_header": 333
-"hi_in_prefix": +91
+"hi_in_prefix": +91 #India
 "hi_in_header": 94051
-"ru_ru_prefix": +7
+"ru_ru_prefix": +7 #Russia
 "ru_ru_header": 95858
-"ko_kr_prefix": +82
+"ko_kr_prefix": +82 #South Korea
 "ko_kr_header": 19843
-"el_gr_prefix": +30
+"el_gr_prefix": +30 #Greece
 "el_gr_header": 69314
-"ar_sa_prefix": +966
+"ar_sa_prefix": +966 #Saudi Arabia
 "ar_sa_header": 5075
-"dk_dk_prefix": +45
+"dk_dk_prefix": +45 #Denmark
 "dk_dk_header": 401
-"fi_fl_prefix": +358
-"fi_fl_header": 50
-"no_no_prefix": +47
-"no_no_header": 815
+"fi_fi_prefix": +358 #Finland
+"fi_fi_header": 50
+"nb_no_prefix": +47 #Norway
+"nb_no_header": 815
+"hr_hr_prefix": +385 #Croatia
+"hr_hr_header": 920
+"mt_mt_prefix": +356 #Malta
+"mt_mt_header": 994
+"sl_si_prefix": +386 #slovenia
+"sl_si_header": 686
