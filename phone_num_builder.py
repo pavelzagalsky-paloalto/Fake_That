@@ -35,6 +35,7 @@ class PhoneNum():
         return fake_number, fake_number_no_prefix
 
 
+
 def randomize_local(prefix, header):
     random_num = randint(00000, 99999)
     base_phone_num = '{}{}'.format(prefix, header)
