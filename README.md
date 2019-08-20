@@ -31,7 +31,43 @@ http://my_fake_profile.com:5000/get_profile/en_US
 
 Currently the following locales are supported:
 
-de_de, en_gb, en_us, en_ca, en_nz, es_es, es_mx, nl_nl, en_au, fr_fr, he_il, ja_jp, pt_br
+Currently the following locales are supported:
+
+de_de, en_gb, en_us, en_ca, en_nz, es_es, es_mx, nl_nl,
+en_au, fr_fr, he_il, ja_jp, pt_br, in_id, ar_qa, hi_in,
+ru_ru, ko_kr, el_gr, ar_sa, dk_dk, fi_fi, nb_no, hr_hr,
+mt_mt, sl_si, pt_pt
+
+
+Supported countries: 
+Germany,
+UK,
+USA,
+Canada,
+New Zealand,
+Singapore,
+Spain,
+Mexico,
+Netherlands,
+Australia,
+France,
+Israel,
+japan,
+Brazil,
+Indonesia,
+Qatar,
+India,
+Russia,
+South Korea,
+Greece,
+Saudi Arabia,
+Denmark,
+Finland,
+Norway,
+Croatia,
+Malta,
+Slovenia,
+Portugal
 
 **Any contribution is welcome!!**
 
