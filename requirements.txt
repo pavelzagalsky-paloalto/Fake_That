@@ -12,4 +12,4 @@ python-dateutil==2.7.2
 PyYAML==4.2b1
 six==1.11.0
 text-unidecode==1.2
-Werkzeug==0.14.1
+Werkzeug==0.1
